@@ -4,8 +4,8 @@
 
 #Name, headers, sources
 TARGET=UklRow
-_DEPS=Wektor.hh
-_OBJ=main.o Wektor.o
+_DEPS=Wektor.hh MacierzKw.hh UklRowL.hh
+_OBJ=main.o Wektor.o MacierzKw.o UklRowL.o
 
 ####DIRS###
 TRG_DIR=./
@@ -33,5 +33,5 @@ $(TARGET): $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f ${TRGDIR}/$(TARGET) ${OBJ}/*
+	rm -f ${TRGDIR}$(TARGET) ${OBJ_DIR}/*
 
