@@ -45,7 +45,7 @@ int main()
     cout << "det:" << endl;
     cout << m1.wyznacznik() << endl;
 
-
+    /*
     MacierzKw m3;
     cout << "Podaj macierz(wierszami): " << endl;
     cin >> m3;
@@ -53,5 +53,7 @@ int main()
     cout << m3;
     if( m3 == m1 || m3 == m2)
         cout << "Było" << endl;
-    
+    */
+
+
 }

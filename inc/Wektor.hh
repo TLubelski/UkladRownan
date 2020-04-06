@@ -25,10 +25,10 @@ public:
     bool operator==(const Wektor &W2) const;
     bool operator!=(const Wektor &W2) const;
 
-    const Wektor operator+(const Wektor &W2) const;
+    Wektor operator+(const Wektor &W2) const;
     const Wektor & operator+=(const Wektor &W2);
 
-    const Wektor operator-(const Wektor &W2) const;
+    Wektor operator-(const Wektor &W2) const;
     const Wektor & operator-=(const Wektor &W2);
 
     double operator*(const Wektor &W2) const; //iloczyn skalarny

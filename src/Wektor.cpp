@@ -64,7 +64,7 @@ bool Wektor::operator!=(const Wektor &W2) const
     return !(*this == W2);
 }
 
-const Wektor Wektor::operator+(const Wektor &W2) const
+Wektor Wektor::operator+(const Wektor &W2) const
 {
     Wektor temp;
     for (int i = 0; i < ROZMIAR; i++)
@@ -78,7 +78,7 @@ const Wektor & Wektor::operator+=(const Wektor &W2)
     return *this;
 }
 
-const Wektor Wektor::operator-(const Wektor &W2) const
+Wektor Wektor::operator-(const Wektor &W2) const
 {
     Wektor temp;
     for (int i = 0; i < ROZMIAR; i++)

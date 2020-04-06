@@ -14,9 +14,9 @@ private:
     Wektor tab[ROZMIAR]; //kazdemu wierszowi odpowiada wektor
 
     /*METODY WEWNETRZNE*/
-    const double w_gauss() const; //pojawil sie problem z dokladnoscia double
-    const double w_bareiss() const;
-    const double w_sarruss() const;
+    double w_gauss() const; //pojawil sie problem z dokladnoscia double
+    double w_bareiss() const;
+    double w_sarruss() const;
 
 public:
     /*KONSTRUKTORY*/
@@ -31,24 +31,24 @@ public:
     bool operator==(const MacierzKw &M2) const;
     bool operator!=(const MacierzKw &M2) const;
 
-    const MacierzKw operator+(const MacierzKw &M2) const;
+    MacierzKw operator+(const MacierzKw &M2) const;
     const MacierzKw & operator+=(const MacierzKw &M2);
 
-    const MacierzKw operator-(const MacierzKw &M2) const;
+    MacierzKw operator-(const MacierzKw &M2) const;
     const MacierzKw & operator-=(const MacierzKw &M2);
 
-    const MacierzKw operator*(const MacierzKw &M2) const; //mnozenie dwoch macierzy
+    MacierzKw operator*(const MacierzKw &M2) const; //mnozenie dwoch macierzy
 
     /*API*/
     void utworzI(); //tworzy macierz jednostkowa
 
-    const MacierzKw schodkowa() const; //zwraca macierz schodkowa
+    MacierzKw schodkowa() const; //zwraca macierz schodkowa
 
-    const MacierzKw transpozycja() const; 
+    MacierzKw transpozycja() const; 
 
     double wyznacznik(Wyz metoda = Bareiss) const;
 
-    const MacierzKw odwrotnosc(Odw metoda = _Gauss) const; //WIP
+    MacierzKw odwrotnosc(Odw metoda = _Gauss) const; //WIP
 };
 
 /*OPERATORY ZEWNETRZNE*/

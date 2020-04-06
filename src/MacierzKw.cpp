@@ -63,7 +63,7 @@ bool MacierzKw::operator!=(const MacierzKw &M2) const
     return !(*this == M2);
 }
 
-const MacierzKw MacierzKw::operator+(const MacierzKw &M2) const
+MacierzKw MacierzKw::operator+(const MacierzKw &M2) const
 {
     MacierzKw temp;
     for (int i = 0; i < ROZMIAR; i++)
@@ -77,7 +77,7 @@ const MacierzKw & MacierzKw::operator+=(const MacierzKw &M2)
     return *this;
 }
 
-const MacierzKw MacierzKw::operator-(const MacierzKw &M2) const
+MacierzKw MacierzKw::operator-(const MacierzKw &M2) const
 {
     MacierzKw temp;
     for (int i = 0; i < ROZMIAR; i++)
@@ -91,7 +91,7 @@ const MacierzKw & MacierzKw::operator-=(const MacierzKw &M2)
     return *this;
 }
 
-const MacierzKw MacierzKw::operator*(const MacierzKw &M2) const
+MacierzKw MacierzKw::operator*(const MacierzKw &M2) const
 {
     MacierzKw temp;
     for (int i = 0; i < ROZMIAR; i++)
@@ -122,7 +122,7 @@ void MacierzKw::utworzI()
     }
 }
 
-const MacierzKw MacierzKw::schodkowa() const
+MacierzKw MacierzKw::schodkowa() const
 {
     MacierzKw temp = *this;
     double mnoznik;
@@ -143,7 +143,7 @@ const MacierzKw MacierzKw::schodkowa() const
 
 }
 
-const MacierzKw MacierzKw::transpozycja() const
+MacierzKw MacierzKw::transpozycja() const
 {
     MacierzKw temp;
     for (int i = 0; i < ROZMIAR; i++)
@@ -190,22 +190,57 @@ double MacierzKw::wyznacznik(Wyz metoda) const
     return det;
 }
 
-
-const MacierzKw MacierzKw::odwrotnosc(Odw metoda) const
+/*
+MacierzKw MacierzKw::odwrotnosc(Odw metoda) const
 {
+    
     MacierzKw temp = *this;
-    /* 
-    Work
-    in
-    progress
-    */
-    return temp;
-}
+    
+    MacierzKw dolaczona;
+    dolaczona.utworzI();
+    double mnoznik;
+    //do schodkowej
+    for (int i = 0; i < ROZMIAR - 1; i++)
+    {
+        for (int j = i + 1; j < ROZMIAR; j++)
+        {
+            if (temp[i][i] == 0)
+            {
+                cerr << "[!]Dzielenie przez 0" << endl;
+                exit(1);
+            }
+            mnoznik = -temp[j][i] / temp[i][i]; //obliczanie mnoznika  wiersza
+            temp[j] += mnoznik * temp[i];       //dodwawanie pomnozonego wiersza by uzyskac 0
+            dolaczona[j] += mnoznik * temp[i];
+        }
+    }
 
+    //do diagonalnej
+    for (int i = ROZMIAR-1; i > 0; i--)
+    {
+        for (int j = ROZMIAR - 1; j > i+1; j--)
+        {
+            if (temp[i][i] == 0)
+            {
+                cerr << "[!]Dzielenie przez 0" << endl;
+                exit(1);
+            }
+            mnoznik = -temp[j][i] / temp[i][i]; //obliczanie mnoznika  wiersza
+            temp[j] += mnoznik * temp[i];       //dodwawanie pomnozonego wiersza by uzyskac 0
+            dolaczona[j] += mnoznik * temp[i];
+        }
+    }
+
+    cout << temp << endl;
+    
+
+    return dolaczona;
+}
+*/
 
 /***METODY WEWNETRZNE***/
 
-const double MacierzKw::w_gauss() const
+double MacierzKw::w_gauss() const
 {
     double det = 1;
     MacierzKw temp = this->schodkowa();
@@ -216,7 +251,7 @@ const double MacierzKw::w_gauss() const
     return det;
 }
 
-const double MacierzKw::w_bareiss() const
+double MacierzKw::w_bareiss() const
 {
     MacierzKw temp = *this;
 
@@ -240,7 +275,7 @@ const double MacierzKw::w_bareiss() const
     return temp[ROZMIAR - 1][ROZMIAR - 1];
 }
 
-const double MacierzKw::w_sarruss() const
+double MacierzKw::w_sarruss() const
 {
     double det;
     det = (tab[0][0] * tab[1][1] * tab[2][2] + tab[0][1] * tab[1][2] * tab[2][0] + tab[0][2] * tab[1][0] * tab[2][1]);
