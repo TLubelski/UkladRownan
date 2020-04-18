@@ -16,7 +16,6 @@ public:
     UklRowL(){}
     UklRowL(MacierzKw A, Wektor b);
 
-
     const Wektor & get_wektor_wolny() const;
     void set_wektor_wolny(const Wektor & W_n);
 
@@ -24,6 +23,8 @@ public:
     void set_macierz(const MacierzKw & M_n);
 
     Wektor oblicz() const;
+
+    Wektor wekt_bledu() const;
 };
 
 std::ostream &operator<<(std::ostream &strm, const UklRowL &Uklad);

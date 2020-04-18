@@ -12,7 +12,7 @@ MacierzKw::MacierzKw(Wektor *W)
         this->tab[i] = W[i];
 }
 
-MacierzKw::MacierzKw(Wektor W1, Wektor W2, Wektor W3)
+MacierzKw::MacierzKw(const Wektor &W1, const Wektor &W2, const Wektor &W3)
 {
     if(ROZMIAR != 3)
     {
@@ -106,18 +106,28 @@ MacierzKw MacierzKw::operator*(const MacierzKw &M2) const
     return temp;
 }
 
+Wektor MacierzKw::operator*(const Wektor &W2) const
+{
+    Wektor temp(0,0,0);
+    for (int i = 0; i < ROZMIAR; i++)
+    {
+        for (int j = 0; j < ROZMIAR; j++)
+        {
+            temp[i] += tab[i][j] * W2[j]; 
+        }
+    }
+    return temp;
+}
+
 /*****API******/
 
 void MacierzKw::utworzI()
 {
-    for (int i = 0; i < ROZMIAR - 1; i++)
+    for (int i = 0; i < ROZMIAR; i++)
     {
         for (int j = 0; j < ROZMIAR; j++)
         {
-            if(i == j)
-                tab[i][j] = 1;
-            else
-                tab[i][j] = 0;
+            tab[i][j] = (i == j) ? 1 : 0;
         }
     }
 }
@@ -130,7 +140,7 @@ MacierzKw MacierzKw::schodkowa() const
     {
         for (int j = i + 1; j < ROZMIAR; j++)
         {
-            if(temp[i][i] == 0)
+            if( cmp(temp[i][i], 0) )
             {
                 cerr << "[!]Dzielenie przez 0" << endl;
                 exit(1);
@@ -187,56 +197,68 @@ double MacierzKw::wyznacznik(Wyz metoda) const
         }
     }
 
+    if (cmp(det, 0) ) //zabezpieczenie przed wynikiem -0
+        det = 0;
+
     return det;
 }
 
-/*
-MacierzKw MacierzKw::odwrotnosc(Odw metoda) const
+
+MacierzKw MacierzKw::odwrotnosc() const
 {
-    
     MacierzKw temp = *this;
-    
     MacierzKw dolaczona;
     dolaczona.utworzI();
     double mnoznik;
+
+    if( cmp(temp.wyznacznik(), 0) )
+    {
+        cerr << "[!]Wyznacznik 0, macierz nieodwracalna" << endl;
+        exit(1);
+    }
+
     //do schodkowej
     for (int i = 0; i < ROZMIAR - 1; i++)
     {
         for (int j = i + 1; j < ROZMIAR; j++)
         {
-            if (temp[i][i] == 0)
+            if ( cmp(temp[i][i], 0) )
             {
                 cerr << "[!]Dzielenie przez 0" << endl;
                 exit(1);
             }
             mnoznik = -temp[j][i] / temp[i][i]; //obliczanie mnoznika  wiersza
             temp[j] += mnoznik * temp[i];       //dodwawanie pomnozonego wiersza by uzyskac 0
-            dolaczona[j] += mnoznik * temp[i];
+            dolaczona[j] += mnoznik * dolaczona[i];
         }
     }
 
     //do diagonalnej
-    for (int i = ROZMIAR-1; i > 0; i--)
+    for (int i = ROZMIAR - 1; i > 0; i--)
     {
-        for (int j = ROZMIAR - 1; j > i+1; j--)
+        for (int j = i - 1; j >= 0; j--)
         {
-            if (temp[i][i] == 0)
+            if ( cmp(temp[i][i], 0) )
             {
                 cerr << "[!]Dzielenie przez 0" << endl;
                 exit(1);
             }
             mnoznik = -temp[j][i] / temp[i][i]; //obliczanie mnoznika  wiersza
             temp[j] += mnoznik * temp[i];       //dodwawanie pomnozonego wiersza by uzyskac 0
-            dolaczona[j] += mnoznik * temp[i];
+            dolaczona[j] += mnoznik * dolaczona[i];
         }
     }
 
-    cout << temp << endl;
-    
+    //do jednostkowej
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        dolaczona[i] = (1.0 / temp[i][i]) * dolaczona[i];
+        temp[i] = (1.0 / temp[i][i]) * temp[i];
+    }
 
     return dolaczona;
 }
-*/
+
 
 /***METODY WEWNETRZNE***/
 
@@ -262,7 +284,7 @@ double MacierzKw::w_bareiss() const
                 temp[j][k] = (temp[j][k] * temp[i][i] - temp[j][i] * temp[i][k]);
                 if (i)
                 {
-                    if(temp[i-1][i-1] == 0)
+                    if( cmp(temp[i-1][i-1], 0) )
                     {
                         cerr << "[!]Dzielenie przez 0" << endl;
                         exit(1);

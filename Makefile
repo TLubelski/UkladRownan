@@ -4,8 +4,8 @@
 
 #Name, headers, sources
 TARGET=UklRow
-_DEPS=Wektor.hh MacierzKw.hh UklRowL.hh
-_OBJ=main.o Wektor.o MacierzKw.o UklRowL.o
+_DEPS=common.hh Wektor.hh MacierzKw.hh UklRowL.hh
+_OBJ=common.o main.o Wektor.o MacierzKw.o UklRowL.o
 
 ####DIRS###
 TRG_DIR=./

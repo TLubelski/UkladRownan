@@ -3,10 +3,10 @@
 
 #include <iostream>
 
-/*Definicja rozmiaru wektora/macierzy*/
-#define ROZMIAR 3 
+#include "common.hh"
 
-/*Klasa opisujaca macierz kwadratowa*/
+
+/*Klasa opisujaca wektor*/
 class Wektor
 {
 private:

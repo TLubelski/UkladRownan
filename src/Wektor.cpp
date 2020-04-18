@@ -53,7 +53,7 @@ bool Wektor::operator==(const Wektor &W2) const
     bool wynik = true;
     for (int i = 0; i < ROZMIAR; i++)
     {
-        if (tab[i] != W2.tab[i])
+        if ( !cmp(tab[i], W2.tab[i]) )
             wynik = false;
     }
     return wynik;

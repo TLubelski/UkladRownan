@@ -5,7 +5,6 @@
 
 enum Wyz{Gauss, Sarruss, Bareiss}; //wybor metody liczenia wyznacznika
 
-enum Odw{_Gauss, _Dopel}; //wybor metody liczenia odwrotnosci
 
 /*Klasa opisujaca macierz kwadratowa*/
 class MacierzKw
@@ -22,7 +21,7 @@ public:
     /*KONSTRUKTORY*/
     MacierzKw(){}
     MacierzKw(Wektor *W); //przyjmuje tablice wektorow
-    MacierzKw(Wektor W1, Wektor W2, Wektor W3); //przyjmuje 3 wektory
+    MacierzKw(const Wektor & W1,const Wektor & W2,const Wektor & W3); //przyjmuje 3 wektory
     
     /*OPERATORY*/
     const Wektor & operator[](int index) const;
@@ -38,6 +37,8 @@ public:
     const MacierzKw & operator-=(const MacierzKw &M2);
 
     MacierzKw operator*(const MacierzKw &M2) const; //mnozenie dwoch macierzy
+    
+    Wektor operator*(const Wektor &W2) const; //mnozenie przez wektor
 
     /*API*/
     void utworzI(); //tworzy macierz jednostkowa
@@ -48,7 +49,7 @@ public:
 
     double wyznacznik(Wyz metoda = Bareiss) const;
 
-    MacierzKw odwrotnosc(Odw metoda = _Gauss) const; //WIP
+    MacierzKw odwrotnosc() const; //WIP
 };
 
 /*OPERATORY ZEWNETRZNE*/
